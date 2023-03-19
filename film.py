@@ -30,7 +30,7 @@ class Serial(Film):
     def __str__(self) -> str:
         return f'{self.name}  S{self.season}E{self.episode}'
 
-def add_serial():
+def add_serial():             #Дані записуються в csv файл, але не ініціалізуються як обєкт класу Serial
     with open(path, 'a', newline='') as csvfile:
         fieldnames = ['name', 'year', 'genre', 'views', 'season', 'episode']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
@@ -58,7 +58,8 @@ def get_film() -> List[Film]:
         if isinstance(movie, Film):
             list_film.append(movie)
     return list_film
-
+                                            # Функції get_film() та get_serial() - повертають пусті списки
+                                     
 def get_serial() -> List[Serial]:
     print('List of serials')
     list_serial = []
