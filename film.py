@@ -1,5 +1,6 @@
 import csv
 from typing import List
+from typing import Dict
 import random
 import os
 
@@ -30,8 +31,15 @@ class Serial(Film):
     
     def __str__(self) -> str:
         return f'{self.name}  S{self.season}E{self.episode}'
+    
+    def number_of_episodes(self) -> int:
+        serial_name = input('Please enter name of serial: ')
+        for movie in movies_collection:
+            if serial_name == movie.name:
+                print(movie.episode)
 
-def add_serial():             #Дані записуються в csv файл, але не ініціалізуються як обєкт класу Serial
+
+def add_serial():             
     with open(path, 'a', newline='') as csvfile:
         fieldnames = ['name', 'year', 'genre', 'views', 'season', 'episode']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
@@ -59,7 +67,7 @@ def get_film() -> List[Film]:
         if isinstance(movie, Film):
             list_film.append(movie)
     return list_film
-                                            # Функції get_film() та get_serial() - повертають пусті списки
+                                            
                                      
 def get_serial() -> List[Serial]:
     print('List of serials')
