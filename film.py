@@ -1,11 +1,12 @@
 import csv
 from typing import List
 import random
+import os
 
 print("Movies collection")
 
 movies_collection = []
-path = 'C:\\Users\\Professional\\Desktop\\Kodilla\\film\\film.csv'
+path = os.path.join(os.getcwd(), 'Desktop','Kodilla','film','film.csv')
 
 class Film:
     def __init__(self, name: str, year: int, genre: str, views: int) -> None:
@@ -68,25 +69,25 @@ def get_serial() -> List[Serial]:
             list_serial.append(serial)
     return list_serial
 
-def search():
+def search() -> str:
     search_name = input('Please enter name of film to search: ')
     for movie in movies_collection:
         if search_name == movie.name:
             print(movie)
 
-def generate_views():
+def generate_views() -> int:
     for movie in movies_collection:
         views = random.randint(1, 100)
         yield (movie, views)
 
-def ten_generate_views(generate_views):
+def ten_generate_views(generate_views) -> int:
     for i in range(10):
         generate_views()
 
-
-with open(path, newline='') as csvfile:
-    reader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
-    for row in reader:
-        movies_collection.append(Film(name=row['name'], year=int(row['year']), genre=row['genre'], views=int(row['views'])))
-for movie in movies_collection:
-    print(movie)
+if __name__ == '__main__':
+    with open(path, newline='') as csvfile:
+        reader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
+        for row in reader:
+            movies_collection.append(Film(name=row['name'], year=int(row['year']), genre=row['genre'], views=int(row['views'])))
+    for movie in movies_collection:
+        print(movie)
